@@ -1,0 +1,13 @@
+---
+- name: Configures Git
+  hosts: localhost
+
+  vars:
+    user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+    - name: setup ~/.gitconfig
+      copy:
+        src: files/.gitconfig
+        dest: "{{ user_home }}/.gitconfig"
+

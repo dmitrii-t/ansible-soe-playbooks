@@ -1,0 +1,27 @@
+[color]
+    ui = auto
+[log]
+    date = local
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[merge]
+    tool = meld
+[push]
+    default = current
+[alias]
+    ci = commit
+    st = status
+    co = checkout
+    br = branch
+    up = merge --ff-only @{u}
+    unstage = reset HEAD --
+    l = "!git --no-pager lg -10; echo"
+    diff-local = diff origin/HEAD
+    meld = difftool --dir-diff
+    purr = "pull -r"
+    so = !git-switch-origin
+    su = !git-switch-user
+    ro = !git-restore-origin
+    pull-from = !git=pull-from-machine
