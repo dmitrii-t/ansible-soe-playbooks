@@ -5,3 +5,4 @@ set -x
 ansible-playbook ./golang/golang.yml --ask-become-pass
 ansible-playbook ./keymap/keymap.yml
 ansible-playbook ./git/git.yml
+ansible-playbook ./aws/aws.yml

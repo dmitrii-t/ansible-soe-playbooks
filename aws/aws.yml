@@ -1,0 +1,16 @@
+---
+- name: Configures AWS Aliases
+  hosts: localhost
+
+  vars:
+    user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+    - name: Ensures ~/.aws/cli/alias dir exists
+      file: path={{ user_home }}/.aws/cli state=directory
+
+    - name: setup ~/.aws/cli/alias
+      copy:
+        src: files/alias
+        dest: "{{ user_home }}/.aws/cli/alias"
+
