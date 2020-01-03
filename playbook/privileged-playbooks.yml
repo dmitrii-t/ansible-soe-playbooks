@@ -1,0 +1,3 @@
+---
+- import_playbook: ./golang/golang.yml
+- import_playbook: ./terraform/terraform.yml
