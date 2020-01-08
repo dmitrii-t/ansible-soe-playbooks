@@ -1,0 +1,13 @@
+---
+- name: Configures Nano
+  hosts: localhost
+
+  vars:
+    user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: setup ~/.nanorc
+    copy:
+      src: files/.nanorc
+      dest: "{{ user_home }}/.nanorc"
+
