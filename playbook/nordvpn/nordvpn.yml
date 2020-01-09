@@ -1,0 +1,24 @@
+---
+- name: Insall NordVPN
+  hosts: localhost
+  vars:
+  - home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Getting NordVPN
+    get_url:
+      url: "https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb?_ga=2.39433761.3099191.1578532947-169602978.1578532947"
+      dest: "{{ home }}/Downloads/nordvpn-release_1.0.0_all.deb"
+
+  - name: Install NordVPN .deb package
+    become: true
+    become_method: sudo
+    apt:
+      deb: "{{ home }}/Downloads/nordvpn-release_1.0.0_all.deb"
+
+  - name: Install NordVPN
+    become: true
+    become_method: sudo
+    apt:
+      name: nordvpn
+      update_cache: yes
