@@ -1,0 +1,50 @@
+---
+- name: Configures Gnome
+  hosts: localhost
+
+  tasks:
+
+#  - name: configure Gnome shell extensions
+#    dconf: key={{ item.key }} value={{ item.value }} state=present
+#    with_items:
+#    - { key: "/org/gnome/shell/enabled-extensions", value: "['alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com', 'pixel-saver@deadalnix.me']" }
+#    - { key: "/org/gnome/shell/extensions/system-monitor/show-tooltip", value: "true" }
+#    - { key: "/org/gnome/shell/extensions/system-monitor/disk-display", value: "true" }
+#    - { key: "/org/gnome/shell/extensions/system-monitor/net-display", value: "false" }
+#    - { key: "/org/gnome/shell/extensions/system-monitor/cpu-refresh-time", value: "1000" }
+#    - { key: "/org/gnome/shell/extensions/system-monitor/memory-refresh-time", value: "1000" }
+#    - { key: "/org/gnome/shell/extensions/system-monitor/disk-refresh-time", value: "1000" }
+
+  - name: install tools
+    block:
+    - apt: name={{ item }}
+      with_items:
+      - python3-psutil
+    become: yes
+
+  - name: install Numix theme for GTK
+    apt: name=numix-gtk-theme
+    become: yes
+
+  - name: configure Gnome using DConf
+    dconf: key={{ item.key }} value={{ item.value }} state=present
+    with_items:
+    - { key: "/org/gnome/desktop/interface/clock-show-date", value: "true" } # show date in top bar clock
+    #    - { key: "/org/gnome/desktop/interface/clock-show-seconds", value: "false" } # show seconds in top bar clock
+    - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true" } # show battery percentage in top bar
+    - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true" } # show week of year in top bar calendar
+
+    - { key: "/org/gnome/desktop/interface/gtk-theme", value: "'Numix'" } # use Numix GTK+ theme
+    - { key: "/com/ubuntu/sound/allow-amplified-volume", value: "true" } # allow volume to be set above 100% in top bar
+    - { key: "/org/gnome/desktop/input-sources/xkb-options", value: "['ctrl:swap_lalt_lctl_lwin']" } # Left Alt as Ctrl, Left Ctrl as Super, Left Super as Alt
+    - { key: "/org/gnome/desktop/notifications/show-in-lock-screen", value: "false" } # don't show notifications on lock screen
+    - { key: "/org/gnome/desktop/interface/gtk-enable-primary-paste", value: "false" } # disable middle-click paste
+    - { key: "/org/gnome/desktop/privacy/remember-recent-files", value: "false" } # disable files tracker (massive resource hog)
+
+    - { key: "/org/gnome/rhythmbox/sources/visible-columns", value: "['post-time', 'artist', 'duration', 'album', 'track-number', 'date', 'first-seen']" }
+
+  - name: configure keyboard shortcuts using DConf
+    dconf: key={{ item.key }} value={{ item.value }} state=present
+    with_items:
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-left",    value: "[]" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-right",    value: "[]" }
