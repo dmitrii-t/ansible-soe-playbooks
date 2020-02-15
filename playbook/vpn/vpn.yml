@@ -1,0 +1,13 @@
+---
+- name: Insall Network Manager Gnome
+  hosts: localhost
+  vars:
+  - home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+
+  - name: Insall Network Manager Gnome
+    become: true
+    become_method: sudo
+    apt:
+      name: network-manager-openvpn-gnome

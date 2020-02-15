@@ -2,4 +2,5 @@
 - import_playbook: ./gnome/gnome.yml
 - import_playbook: ./golang/golang.yml
 - import_playbook: ./terraform/terraform.yml
-- import_playbook: ./nordvpn/nordvpn.yml
+#- import_playbook: ./nordvpn/nordvpn.yml
+- import_playbook: ./vpn/vpn.yml
