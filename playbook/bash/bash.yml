@@ -1,0 +1,20 @@
+---
+- name: Configuring bash
+  hosts: localhost
+
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: copy bash_functions.sh
+    copy:
+      src: files/bash_functions.sh
+      dest: "{{ user_home }}/.bash_functions"
+
+  - name: Updating PATH
+    blockinfile:
+      dest: "{{ user_home }}/.bash_profile"
+      regexp: "export PATH=$PATH:{{ user_home }}/.bash_functions"
+      create: yes
+      content: |
+        export PATH=$PATH:{{ user_home }}/.bash_functions

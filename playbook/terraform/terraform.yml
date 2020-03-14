@@ -2,7 +2,7 @@
 - name: Insall Terraform
   hosts: localhost
   vars:
-  - home: "{{ lookup('env', 'HOME') }}"
+  - user_home: "{{ lookup('env', 'HOME') }}"
   - checksum: sha256:e7ebe3ca988768bffe0c239d107645bd53515354cff6cbe5651718195a151700
   - version: 0.12.18
   - arch: amd64
@@ -12,18 +12,18 @@
   - name: Getting Terraform
     get_url:
       url: "https://releases.hashicorp.com/terraform/{{ version }}/terraform_{{ version }}_{{ os }}_{{ arch }}.zip"
-      dest: "{{ home }}/Downloads/terraform_{{ version }}_{{ os }}_{{ arch }}.zip"
+      dest: "{{ user_home }}/Downloads/terraform_{{ version }}_{{ os }}_{{ arch }}.zip"
       checksum: "{{ checksum }}"
 
   - name: Unpacking Traform
     become: true
     become_method: sudo
     unarchive:
-      src: "{{ home }}/Downloads/terraform_{{ version }}_{{ os }}_{{ arch }}.zip"
+      src: "{{ user_home }}/Downloads/terraform_{{ version }}_{{ os }}_{{ arch }}.zip"
       dest: /usr/local/bin
 
   - name: Soursign PATH
     shell: |
-      source "{{ home }}/.bash_profile"
+      source "{{ user_home }}/.bash_profile"
     args:
       executable: /bin/bash

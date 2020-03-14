@@ -2,7 +2,7 @@
 - name: Insall golang
   hosts: localhost
   vars:
-  - home: "{{ lookup('env', 'HOME') }}"
+  - user_home: "{{ lookup('env', 'HOME') }}"
   - checksum: sha256:94f874037b82ea5353f4061e543681a0e79657f787437974214629af8407d124
   - version: 1.13.1
   - arch: amd64
@@ -19,12 +19,12 @@
     become: true
     become_method: sudo
     unarchive:
-      src: "{{ home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
+      src: "{{ user_home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
       dest: /usr/local
 
   - name: Updating PATH
     blockinfile:
-      dest: "{{ home }}/.bash_profile"
+      dest: "{{ user_home }}/.bash_profile"
       regexp: "export PATH=$PATH:/usr/local/go/bin"
       create: yes
       content: |
@@ -32,7 +32,7 @@
 
   - name: Soursign PATH
     shell: |
-      source "{{ home }}/.bash_profile"
+      source "{{ user_home }}/.bash_profile"
     args:
       executable: /bin/bash
 
