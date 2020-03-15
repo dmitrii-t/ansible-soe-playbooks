@@ -3,8 +3,8 @@
   hosts: localhost
   vars:
   - user_home: "{{ lookup('env', 'HOME') }}"
-  - checksum: sha256:94f874037b82ea5353f4061e543681a0e79657f787437974214629af8407d124
-  - version: 1.13.1
+  - checksum: sha256:08df79b46b0adf498ea9f320a0f23d6ec59e9003660b4c9c1ce8e5e2c6f823ca
+  - version: 1.14
   - arch: amd64
   - os: linux
 
@@ -12,7 +12,7 @@
   - name: Getting golang
     get_url:
       url: "https://dl.google.com/go/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
-      dest: "{{ home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
+      dest: "{{ user_home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
       checksum: "{{ checksum }}"
 
   - name: Unpacking golang
