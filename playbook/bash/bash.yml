@@ -17,9 +17,8 @@
   - name: update bash_profile with bash_aliases
     blockinfile:
       dest: "{{ user_home }}/.bash_profile"
-      regexp: "source {{ user_home }}/.bash_aliases"
-      create: yes
-      content: |
+      marker: "# {mark} ANSIBLE MANAGED BLOCK bash"
+      block: |
         source {{ user_home }}/.bash_aliases
         source {{ user_home }}/.bash_functions
 

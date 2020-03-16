@@ -25,17 +25,15 @@
   - name: Update PATH
     blockinfile:
       dest: "{{ user_home }}/.bash_profile"
-      regexp: "export PATH=$PATH:/usr/local/go/bin"
-      create: yes
-      content: |
+      marker: "# {mark} ANSIBLE MANAGED BLOCK gobin"
+      block: |
         export PATH=$PATH:/usr/local/go/bin
 
   - name: Set GOPATH
     blockinfile:
       dest: "{{ user_home }}/.bash_profile"
-      regexp: "export GOPATH="
-      create: yes
-      content: |
+      marker: "# {mark} ANSIBLE MANAGED BLOCK gopath"
+      block: |
         export GOPATH={{ user_home }}/go
 
   - name: Source PATH
