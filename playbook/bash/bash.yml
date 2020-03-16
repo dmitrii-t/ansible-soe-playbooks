@@ -6,15 +6,25 @@
   - user_home: "{{ lookup('env', 'HOME') }}"
 
   tasks:
-  - name: copy bash_functions.sh
+  - name: copy bash utility scripts
     copy:
-      src: files/bash_functions.sh
-      dest: "{{ user_home }}/.bash_functions"
+      src: "files/{{ item }}.sh"
+      dest: "{{ user_home }}/.{{ item }}"
+    with_items:
+    - bash_aliases
+    - bash_functions
 
-  - name: Updating PATH
+  - name: update bash_profile with bash_aliases
     blockinfile:
       dest: "{{ user_home }}/.bash_profile"
-      regexp: "export PATH=$PATH:{{ user_home }}/.bash_functions"
+      regexp: "source {{ user_home }}/.bash_aliases"
       create: yes
       content: |
-        export PATH=$PATH:{{ user_home }}/.bash_functions
+        source {{ user_home }}/.bash_aliases
+        source {{ user_home }}/.bash_functions
+
+  - name: Source PATH
+    shell: |
+      source "{{ user_home }}/.bash_profile"
+    args:
+      executable: /bin/bash

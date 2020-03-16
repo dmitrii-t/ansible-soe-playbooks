@@ -9,20 +9,20 @@
   - os: linux
 
   tasks:
-  - name: Getting golang
+  - name: Get golang
     get_url:
       url: "https://dl.google.com/go/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
       dest: "{{ user_home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
       checksum: "{{ checksum }}"
 
-  - name: Unpacking golang
+  - name: Unpack golang
     become: true
     become_method: sudo
     unarchive:
       src: "{{ user_home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
       dest: /usr/local
 
-  - name: Updating PATH
+  - name: Update PATH
     blockinfile:
       dest: "{{ user_home }}/.bash_profile"
       regexp: "export PATH=$PATH:/usr/local/go/bin"
@@ -30,7 +30,15 @@
       content: |
         export PATH=$PATH:/usr/local/go/bin
 
-  - name: Soursign PATH
+  - name: Set GOPATH
+    blockinfile:
+      dest: "{{ user_home }}/.bash_profile"
+      regexp: "export GOPATH="
+      create: yes
+      content: |
+        export GOPATH={{ user_home }}/go
+
+  - name: Source PATH
     shell: |
       source "{{ user_home }}/.bash_profile"
     args:
