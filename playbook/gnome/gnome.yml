@@ -16,11 +16,11 @@
 #    - { key: "/org/gnome/shell/extensions/system-monitor/disk-refresh-time", value: "1000" }
 
   - name: install tools
-    block:
-    - apt: name={{ item }}
-      with_items:
-      - python3-psutil
     become: yes
+    block:
+    apt:
+      pkg:
+      - python3-psutil
 
   - name: install Numix theme for GTK
     apt: name=numix-gtk-theme
