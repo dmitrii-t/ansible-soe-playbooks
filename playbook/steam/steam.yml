@@ -1,0 +1,25 @@
+---
+- name: Insall Steam
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Getting Steam
+    get_url:
+      url: "https://steamcdn-a.akamaihd.net/client/installer/steam.deb"
+      dest: "{{ user_home }}/Downloads/steam.deb"
+
+  - name: Install Steam dependencies
+    become: yes
+    become_method: sudo
+    apt:
+      pkg:
+      - libgl1-mesa-dri:i386
+      - libgl1-mesa-glx:i386
+
+  - name: Install Steam .deb package
+    become: true
+    become_method: sudo
+    apt:
+      deb: "{{ user_home }}/Downloads/steam.deb"
