@@ -1,0 +1,46 @@
+---
+- name: Insall android sdk
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+  # The playbook works with existing sdk
+  - android_home: "{{ user_home }}/android/sdk"
+  - android_cfg: "{{ user_home }}/.android/"
+  - build_tools_version: 29.0.3
+  - arch: amd64
+  - os: linux
+
+  tasks:
+  - name: Copy config files
+    copy:
+      src: "files/{{ item }}"
+      dest: "{{ android_cfg }}/{{ item }}"
+    with_items:
+    - repositories.cfg
+
+  - name: Update PATH
+    blockinfile:
+      dest: "{{ user_home }}/.bash_profile"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK android_path"
+      block: |
+        export PATH=$PATH:{{ android_home }}/tools/bin/
+        export PATH=$PATH:{{ android_home }}/platform-tools/
+
+  - name: Set ANDROID_HOME
+    blockinfile:
+      dest: "{{ user_home }}/.bash_profile"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK android_home"
+      block: |
+        export ANDROID_HOME={{ android_home }}
+
+  - name: Update platform and build tools
+    command:
+      cmd: "{{ android_home }}/tools/bin/sdkmanager --install \"tools\" \"platform-tools\" \"build-tools;{{ build_tools_version }}\""
+
+  - name: Install sdk
+    command:
+      cmd: "{{ android_home }}/tools/bin/sdkmanager --install \"platforms;android-29\" \"emulator\""
+
+  - name: Install ndk
+    command:
+      cmd: "{{ android_home }}/tools/bin/sdkmanager --install \"ndk-bundle\" \"lldb;3.1\" \"cmake;3.10.2.4988404\""
