@@ -11,6 +11,13 @@
   - os: linux
 
   tasks:
+  - name: Install community-maintained default set of udev rules for all Android devices
+    become: true
+    become_method: sudo
+    apt:
+      name: adb
+      update_cache: yes
+
   - name: Copy config files
     copy:
       src: "files/{{ item }}"
@@ -24,7 +31,6 @@
       marker: "# {mark} ANSIBLE MANAGED BLOCK android_path"
       block: |
         export PATH=$PATH:{{ android_home }}/tools/bin
-        export PATH=$PATH:{{ android_home }}/platform-tools
 
   - name: Set ANDROID_HOME
     blockinfile:
