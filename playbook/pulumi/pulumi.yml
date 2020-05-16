@@ -1,0 +1,38 @@
+---
+- name: Insall pulumi
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+  - version: 2.2.1 # https://www.pulumi.com/latest-version
+  - arch: x64
+  - os: linux
+
+  tasks:
+  - name: Get pulumi
+    get_url:
+      url: "https://get.pulumi.com/releases/sdk/pulumi-v{{ version }}-{{ os }}-{{ arch }}.tar.gz"
+      dest: "{{ user_home }}/Downloads/pulumi-v{{ version }}.{{ os }}-{{ arch }}.tar.gz"
+
+  - name: Clean ~/.pulumi/bin
+    file:
+      path: "{{ user_home }}/.pulumi/bin"
+      state: absent
+
+  - name: Ensure ~/.pulumi
+    file:
+      path: "{{ user_home }}/.pulumi/bin"
+      state: directory
+      mode: '0755'
+
+  - name: Extract pulumi.tar.gz into ~/.pulumi/bin
+    unarchive:
+      src: "{{ user_home }}/Downloads/pulumi-v{{ version }}.{{ os }}-{{ arch }}.tar.gz"
+      dest: "{{ user_home }}/.pulumi/bin"
+      extra_opts: [--strip-components=1]
+
+  - name: Update PATH
+    blockinfile:
+      dest: "{{ user_home }}/.bash_profile"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK pulumibin"
+      block: |
+        export PATH=$PATH:{{ user_home }}/.pulumi/bin
