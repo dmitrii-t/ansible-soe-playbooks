@@ -1,0 +1,35 @@
+---
+- name: Insall golang
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+  - version: v1.11.0
+  - arch: amd64
+  - os: linux
+
+  tasks:
+  - name: Get minikube
+    get_url:
+      url: "https://storage.googleapis.com/minikube/releases/{{ version }}/minikube-{{ os }}-{{ arch }}"
+      dest: "{{ user_home }}/Downloads/minikube-{{ os }}-{{ arch }}"
+
+
+  - name: Copy minikube
+    become: true
+    become_method: sudo
+    copy:
+      src: "{{ user_home }}/Downloads/{{ item.src }}"
+      dest: "/usr/local/bin/{{ item.dest }}"
+      mode: a+x
+    with_items:
+    - { src: "minikube-{{ os }}-{{ arch }}", dest: "minikube" }
+
+  - name: Set Docker driver by default
+    command:
+      argv:
+        - minikube
+        - config
+        - set
+        - driver
+        - docker
+
