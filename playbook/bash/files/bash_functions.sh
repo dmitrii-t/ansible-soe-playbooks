@@ -14,3 +14,7 @@ pdf-reduce() {
         gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -sOutputFile="$2" "$1"
     fi
 }
+
+g() {
+    { ./gradlew ${@} 2>/dev/null; } || { gradle ${@}; }
+}

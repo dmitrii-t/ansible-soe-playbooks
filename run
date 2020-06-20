@@ -2,7 +2,6 @@
 
 set -x
 
-ansible-playbook ./playbook/keymap/keymap.yml
 ansible-playbook ./playbook/bash/bash.yml
 ansible-playbook ./playbook/nano/nano.yml
 ansible-playbook ./playbook/git/git.yml
