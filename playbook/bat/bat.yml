@@ -1,0 +1,17 @@
+---
+- name: Configures Bat(Cat)
+  hosts: localhost
+  vars:
+    - user_home: "{{ lookup('env', 'HOME') }}"
+    - version: 0.15.4
+    - arch: amd64
+
+  tasks:
+  - name: Get bat
+    get_url:
+      url: "https://github.com/sharkdp/bat/releases/download/v{{ version }}/bat_{{ version }}_{{ arch }}.deb"
+      dest: "{{ user_home }}/Downloads/bat_{{ version }}_{{ arch }}.deb"
+
+  - name: Install bat
+    become: true
+    apt: { deb: "{{ user_home }}/Downloads/bat_{{ version }}_{{ arch }}.deb" }
