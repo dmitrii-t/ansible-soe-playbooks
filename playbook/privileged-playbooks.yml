@@ -4,3 +4,4 @@
 - import_playbook: ./terraform/terraform.yml
 #- import_playbook: ./nordvpn/nordvpn.yml
 - import_playbook: ./vpn/vpn.yml
+- import_playbook: ./bat/bat.yml
