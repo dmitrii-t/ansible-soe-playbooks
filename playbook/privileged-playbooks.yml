@@ -3,5 +3,6 @@
 - import_playbook: ./golang/golang.yml
 - import_playbook: ./terraform/terraform.yml
 #- import_playbook: ./nordvpn/nordvpn.yml
+- import_playbook: ./zoom/zoom.yml
 - import_playbook: ./vpn/vpn.yml
 - import_playbook: ./bat/bat.yml
