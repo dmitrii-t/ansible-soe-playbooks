@@ -17,10 +17,10 @@
 
   - name: install tools
     become: yes
-    block:
     apt:
       pkg:
       - python3-psutil
+      - dconf-editor
 
   - name: install Numix theme for GTK
     apt: name=numix-gtk-theme
@@ -33,6 +33,7 @@
     #    - { key: "/org/gnome/desktop/interface/clock-show-seconds", value: "false" } # show seconds in top bar clock
     - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true" } # show battery percentage in top bar
     - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true" } # show week of year in top bar calendar
+    - { key: "/org/gnome/desktop/peripherals/touchpad/disable-while-typing", value: "true" } #
 
     - { key: "/org/gnome/desktop/interface/gtk-theme", value: "'Numix'" } # use Numix GTK+ theme
     - { key: "/com/ubuntu/sound/allow-amplified-volume", value: "true" } # allow volume to be set above 100% in top bar
@@ -43,8 +44,9 @@
 
     - { key: "/org/gnome/rhythmbox/sources/visible-columns", value: "['post-time', 'artist', 'duration', 'album', 'track-number', 'date', 'first-seen']" }
 
-  - name: configure keyboard shortcuts using DConf
-    dconf: key={{ item.key }} value={{ item.value }} state=present
-    with_items:
-    - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-left",    value: "[]" }
-    - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-right",    value: "[]" }
+
+#  - name: configure keyboard shortcuts using DConf
+#    dconf: key={{ item.key }} value={{ item.value }} state=present
+#    with_items:
+#    - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-left",    value: "[]" }
+#    - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-right",    value: "[]" }
