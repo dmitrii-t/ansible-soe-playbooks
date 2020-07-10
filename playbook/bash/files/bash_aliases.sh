@@ -9,6 +9,7 @@ alias drm='{ docker rm $(docker ps -a -q) 2>/dev/null; } || { echo "No container
 alias ddwn='dstop && drm'
 alias pu='pulumi'
 
+alias mjr='mvn jerry:run'
 alias mbr='mvn spring-boot:run'
 alias mci='mvn clean install'
 alias mcist='mvn clean install -DskipTests=true'
