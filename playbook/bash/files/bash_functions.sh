@@ -18,3 +18,7 @@ pdf-reduce() {
 g() {
     { ./gradlew ${@} 2>/dev/null; } || { gradle ${@}; }
 }
+
+frm() {
+  find . -name $1 -exec rm -rf {} \;
+}
