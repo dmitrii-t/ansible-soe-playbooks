@@ -8,3 +8,7 @@ alias dstop='{ docker stop $(docker ps -a -q) 2>/dev/null; } || { echo "No conta
 alias drm='{ docker rm $(docker ps -a -q) 2>/dev/null; } || { echo "No containers to remove"; }'
 alias ddwn='dstop && drm'
 alias pu='pulumi'
+
+alias mbr='mvn spring-boot:run'
+alias mci='mvn clean install'
+alias mcist='mvn clean install -DskipTests=true'
