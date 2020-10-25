@@ -1,0 +1,28 @@
+---
+- name: Installs VS Code
+  hosts: localhost
+
+  vars:
+  - vscode_mirror: https://packages.microsoft.com
+  - vscode_package: code
+  - vscode_version: ''
+
+  tasks:
+  - name: install key (apt)
+    become: yes
+    apt_key:
+      url: '{{ vscode_mirror }}/keys/microsoft.asc'
+      state: present
+
+  - name: install VS Code repo (apt)
+    become: yes
+    apt_repository:
+      repo: 'deb [arch=amd64] {{ vscode_mirror }}/repos/vscode stable main'
+      filename: vscode
+      state: present
+
+  - name: install VS Code (apt)
+    become: yes
+    apt:
+      name: "{{ vscode_package }}{{ (vscode_version | length > 0) | ternary('=' + vscode_version, '') }}"
+      state: present

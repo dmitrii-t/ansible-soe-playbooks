@@ -14,9 +14,9 @@
     - bash_aliases
     - bash_functions
 
-  - name: update bash_profile with bash_aliases
+  - name: update bash profile with bash_aliases
     blockinfile:
-      dest: "{{ user_home }}/.bash_profile"
+      dest: "{{ user_home }}/.profile"
       marker: "# {mark} ANSIBLE MANAGED BLOCK bash"
       block: |
         source {{ user_home }}/.bash_aliases
@@ -24,6 +24,6 @@
 
   - name: Source PATH
     shell: |
-      source "{{ user_home }}/.bash_profile"
+      source "{{ user_home }}/.profile"
     args:
       executable: /bin/bash
