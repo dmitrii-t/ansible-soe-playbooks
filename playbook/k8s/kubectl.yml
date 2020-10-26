@@ -1,0 +1,13 @@
+---
+- name: Insall Kubectl
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Install Kubectl
+    become: true
+    become_method: sudo
+    snap:
+      name: kubectl
+      classic: yes
