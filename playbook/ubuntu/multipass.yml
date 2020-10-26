@@ -1,0 +1,12 @@
+---
+- name: Insall Multipass a lightweight VM manager https://github.com/canonical/multipass
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Install Multipass
+    become: true
+    become_method: sudo
+    snap:
+      name: multipass
