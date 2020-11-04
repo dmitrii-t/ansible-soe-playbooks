@@ -18,3 +18,4 @@
       marker: "# {mark} ANSIBLE MANAGED BLOCK kubeclt"
       block: |
         source <(kubectl completion bash)
+        complete -F __start_kubectl k

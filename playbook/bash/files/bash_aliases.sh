@@ -13,3 +13,5 @@ alias mjr='mvn jerry:run'
 alias mbr='mvn spring-boot:run'
 alias mci='mvn clean install'
 alias mcist='mvn clean install -DskipTests=true'
+
+alias k=kubectl
