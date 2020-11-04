@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
   - user_home: "{{ lookup('env', 'HOME') }}"
-  - version: v1.11.0
+  - version: latest
   - arch: amd64
   - os: linux
 
