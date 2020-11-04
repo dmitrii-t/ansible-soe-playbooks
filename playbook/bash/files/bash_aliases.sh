@@ -15,3 +15,5 @@ alias mci='mvn clean install'
 alias mcist='mvn clean install -DskipTests=true'
 
 alias k=kubectl
+
+alias mp=multipass
