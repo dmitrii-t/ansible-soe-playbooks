@@ -11,3 +11,10 @@
     snap:
       name: kubectl
       classic: yes
+
+  - name: Update bash profile with kubectl autocompletion
+    blockinfile:
+      dest: "{{ user_home }}/.bashrc"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK kubeclt"
+      block: |
+        source <(kubectl completion bash)
