@@ -1,0 +1,45 @@
+---
+- name: Installs Docker
+  hosts: localhost
+
+  vars:
+  - remote_user: dtcimbal
+  - distro_release: "{{ hostvars[inventory_hostname].ansible_distribution_release }}"
+
+  tasks:
+  - name: Add Docker GPG apt Key
+    become: true
+    become_method: sudo
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    become: true
+    become_method: sudo
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu {{ distro_release }} stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    become: true
+    become_method: sudo
+    apt: update_cache=yes name=docker-ce state=latest
+
+  # Post install tasks below
+  # https://docs.docker.com/engine/install/linux-postinstall/
+
+  - name: Create group
+    become: true
+    become_method: sudo
+    group:
+      name: docker
+      state: present
+    
+  - name: Adds existing user to the group docker
+    become: true
+    become_method: sudo
+    user: 
+      name: "{{ remote_user }}"
+      groups: docker
+      append: yes
