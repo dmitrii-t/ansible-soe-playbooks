@@ -3,8 +3,7 @@
   hosts: localhost
   vars:
   - user_home: "{{ lookup('env', 'HOME') }}"
-  - checksum: sha256:08df79b46b0adf498ea9f320a0f23d6ec59e9003660b4c9c1ce8e5e2c6f823ca
-  - version: 1.14
+  - version: 1.15.4
   - arch: amd64
   - os: linux
 
@@ -13,7 +12,6 @@
     get_url:
       url: "https://dl.google.com/go/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
       dest: "{{ user_home }}/Downloads/go{{ version }}.{{ os }}-{{ arch }}.tar.gz"
-      checksum: "{{ checksum }}"
 
   - name: Unpack golang
     become: true
@@ -24,21 +22,21 @@
 
   - name: Update PATH
     blockinfile:
-      dest: "{{ user_home }}/.bash_profile"
+      dest: "{{ user_home }}/.profile"
       marker: "# {mark} ANSIBLE MANAGED BLOCK gobin"
       block: |
         export PATH=$PATH:/usr/local/go/bin
 
   - name: Set GOPATH
     blockinfile:
-      dest: "{{ user_home }}/.bash_profile"
+      dest: "{{ user_home }}/.profile"
       marker: "# {mark} ANSIBLE MANAGED BLOCK gopath"
       block: |
         export GOPATH={{ user_home }}/go
 
   - name: Source PATH
     shell: |
-      source "{{ user_home }}/.bash_profile"
+      source "{{ user_home }}/.profile"
     args:
       executable: /bin/bash
 
