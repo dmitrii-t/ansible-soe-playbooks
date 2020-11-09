@@ -32,7 +32,7 @@
       dest: "{{ user_home }}/.profile"
       marker: "# {mark} ANSIBLE MANAGED BLOCK gopath"
       block: |
-        export GOPATH={{ user_home }}/go
+        export GOPATH={{ user_home }}/.go
 
   - name: Source PATH
     shell: |
