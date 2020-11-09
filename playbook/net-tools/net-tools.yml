@@ -1,0 +1,14 @@
+---
+- name: Insall Kubectl
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Install net-tools
+    become: true
+    become_method: sudo
+    apt: 
+      name: net-tools 
+      state: latest
+      update_cache: yes
