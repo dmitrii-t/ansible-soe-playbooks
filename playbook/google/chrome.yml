@@ -21,4 +21,4 @@
         state: present
 
     - name: Update apt and install Chrome
-      apt: update_cache=yes name=google-chrome-stable state=latest
+      apt: update_cache=yes name=google-chrome-{{ version }} state=latest
