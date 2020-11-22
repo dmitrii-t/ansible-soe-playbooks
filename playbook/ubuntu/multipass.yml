@@ -10,4 +10,6 @@
     become_method: sudo
     snap:
       name: multipass
-      state: absent
+      state: present
+  - name: Set master as default primary name
+    shell: multipass set client.primary-name=master
