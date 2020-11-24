@@ -1,4 +1,4 @@
-netstat -pant | grep LISTEN#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 alias ap='ansible-playbook'
 
@@ -18,4 +18,4 @@ alias k=kubectl
 
 alias mp=multipass
 
-alias netstat-pant='netstat -pant | grep LISTEN'
+alias netstat-listen='netstat -pant | grep LISTEN'
