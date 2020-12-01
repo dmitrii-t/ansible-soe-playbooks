@@ -1,0 +1,29 @@
+---
+- name: Insall PyCharm Edu
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+  - version: 2020.2.4
+  tasks:
+  - name: Ensure ~/.idea
+    file:
+      path: "{{ user_home }}/.idea"
+      state: directory
+      mode: '0755'
+
+  - name: Get PyCharm Edu
+    get_url:
+      url: "https://download.jetbrains.com/python/pycharm-edu-{{ version }}.tar.gz"
+      dest: "{{ user_home }}/Downloads/pycharm-edu-{{ version }}.tar.gz"
+
+  - name: Unpack PyCharm Edu
+    unarchive:
+      src: "{{ user_home }}/Downloads/pycharm-edu-{{ version }}.tar.gz"
+      dest: "{{ user_home }}/.idea"
+
+  - name: Update PATH
+    blockinfile:
+      dest: "{{ user_home }}/.profile"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK pycharmedu"
+      block: |
+        export PATH=$PATH:{{ user_home }}/.idea/pycharm-edu-{{ version }}/bin

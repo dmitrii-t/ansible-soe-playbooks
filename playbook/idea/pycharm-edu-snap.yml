@@ -1,0 +1,12 @@
+---
+- name: Insall PyCharm Edu
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+  tasks:
+  - name: Install PyCharm Edu
+    become: true
+    become_method: sudo
+    snap:
+      name: pycharm-educational
+      classic: yes
