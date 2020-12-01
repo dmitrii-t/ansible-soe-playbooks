@@ -35,13 +35,15 @@
     - { key: "/org/gnome/desktop/interface/gtk-theme", value: "'Numix'" } # use Numix GTK+ theme
     - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true" } # show week of year in top bar calendar
     - { key: "/org/gnome/desktop/peripherals/touchpad/disable-while-typing", value: "true" } #
+    - { key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll", value: "true" } # Natural scroll when using touchpad
+    - { key: "/org/gnome/desktop/peripherals/mouse/natural-scroll", value: "true" } # Natural scroll when using mouse
     - { key: "/org/gnome/desktop/input-sources/xkb-options", value: "['ctrl:swap_lalt_lctl_lwin']" } # Left Alt as Ctrl, Left Ctrl as Super, Left Super as Alt
     - { key: "/org/gnome/desktop/notifications/show-in-lock-screen", value: "false" } # don't show notifications on lock screen
     - { key: "/org/gnome/desktop/privacy/remember-recent-files", value: "false" } # disable files tracker (massive resource hog)
     - { key: "/org/gnome/desktop/wm/preferences/button-layout", value: "'close,maximize,minimize:'" } # set Window buttons to the left
     - { key: "/org/gnome/rhythmbox/sources/visible-columns", value: "['post-time', 'artist', 'duration', 'album', 'track-number', 'date', 'first-seen']" }
     - { key: "/com/ubuntu/sound/allow-amplified-volume", value: "true" } # allow volume to be set above 100% in top bar
-
+    
   # - name: Set VM shortcuts
   #   dconf: key={{ item.key }} value={{ item.value }} state=present
   #   with_items:
