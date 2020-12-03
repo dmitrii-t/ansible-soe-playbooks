@@ -1,9 +1,6 @@
 ---
-- name: Insall Net tools
+- name: Install net-tools
   hosts: localhost
-  vars:
-  - user_home: "{{ lookup('env', 'HOME') }}"
-
   tasks:
   - name: Install net-tools
     become: true

@@ -1,0 +1,11 @@
+---
+- name: Insall Networking tools
+  hosts: localhost
+  tasks:
+  - name: Install bridge-utils
+    become: true
+    become_method: sudo
+    apt: 
+      name:  bridge-utils
+      state: latest
+      update_cache: yes
