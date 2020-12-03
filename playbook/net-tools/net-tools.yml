@@ -1,5 +1,5 @@
 ---
-- name: Insall Kubectl
+- name: Insall Net tools
   hosts: localhost
   vars:
   - user_home: "{{ lookup('env', 'HOME') }}"
