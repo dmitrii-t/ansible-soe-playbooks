@@ -14,6 +14,6 @@ alias k=kubectl
 alias m=multipass
 alias msm='multipass shell master'
 alias mxm='multipass exec master -- bash -c'
-alias mda='multipass delete --all'
+alias mda='multipass delete --all && multipass purge'
 
 alias netstat-listen='netstat -pant | grep LISTEN'
