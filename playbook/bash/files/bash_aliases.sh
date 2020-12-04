@@ -9,13 +9,11 @@ alias drm='{ docker rm $(docker ps -a -q) 2>/dev/null; } || { echo "No container
 alias ddwn='dstop && drm'
 alias pu='pulumi'
 
-alias mjr='mvn jerry:run'
-alias mbr='mvn spring-boot:run'
-alias mci='mvn clean install'
-alias mcist='mvn clean install -DskipTests=true'
-
 alias k=kubectl
 
-alias mp=multipass
+alias m=multipass
+alias msm='multipass shell master'
+alias mxm='multipass exec master -- bash -c'
+alias mda='multipass delete --all'
 
 alias netstat-listen='netstat -pant | grep LISTEN'

@@ -2,5 +2,8 @@
 ---
 - import_playbook: ./bash/bash.yml
 - import_playbook: ./curl/curl.yml
+- import_playbook: ./diff/colordiff.yml
+- import_playbook: ./diff/wdiff.yml
 - import_playbook: ./nano/nano.yml
-- import_playbook: ./net-tools/net-tools.yml
+- import_playbook: ./network/bridge-utils.yml
+- import_playbook: ./network/net-tools.yml
