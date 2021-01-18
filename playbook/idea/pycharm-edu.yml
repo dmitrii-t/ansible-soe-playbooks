@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
   - user_home: "{{ lookup('env', 'HOME') }}"
-  - version: 2020.2.4
+  - version: 2020.3
   tasks:
   - name: Ensure ~/.idea
     file:
