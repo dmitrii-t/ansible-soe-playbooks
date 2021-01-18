@@ -16,4 +16,6 @@ alias msm='multipass shell master'
 alias mxm='multipass exec master -- bash -c'
 alias mda='multipass delete --all && multipass purge'
 
+alias diff='meld'
+
 alias netstat-listen='netstat -pant | grep LISTEN'
