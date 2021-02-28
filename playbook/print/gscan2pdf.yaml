@@ -1,0 +1,11 @@
+---
+- name: Insall gscan2pdf
+  hosts: localhost
+  vars:
+  - home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Install gscan2pdf
+    become: true
+    become_method: sudo
+    apt: name=gscan2pdf state="present"

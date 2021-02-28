@@ -1,0 +1,12 @@
+---
+- name: Insall PyCharm Community
+  hosts: localhost
+  vars:
+  - user_home: "{{ lookup('env', 'HOME') }}"
+  tasks:
+  - name: Install PyCharm Community
+    become: true
+    become_method: sudo
+    snap:
+      name: pycharm-community
+      classic: yes

@@ -1,0 +1,11 @@
+---
+- name: Insall Pinta
+  hosts: localhost
+  vars:
+  - home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Install Pinta
+    become: true
+    become_method: sudo
+    apt: name=pinta state="present"

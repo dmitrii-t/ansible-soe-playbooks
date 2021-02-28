@@ -37,7 +37,7 @@
     - { key: "/org/gnome/desktop/peripherals/touchpad/disable-while-typing", value: "true" } #
     - { key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll", value: "true" } # Natural scroll when using touchpad
     - { key: "/org/gnome/desktop/peripherals/mouse/natural-scroll", value: "false" } # Inverse scroll when using mouse
-    - { key: "/org/gnome/desktop/input-sources/xkb-options", value: "['ctrl:swap_lalt_lctl_lwin']" } # Left Alt as Ctrl, Left Ctrl as Super, Left Super as Alt
+    - { key: "/org/gnome/desktop/input-sources/xkb-options", value: "['ctrl:swap_lwin_lctl']" } # Left Alt as Ctrl, Left Ctrl as Super, Left Super as Alt
     - { key: "/org/gnome/desktop/notifications/show-in-lock-screen", value: "false" } # don't show notifications on lock screen
     - { key: "/org/gnome/desktop/privacy/remember-recent-files", value: "false" } # disable files tracker (massive resource hog)
     - { key: "/org/gnome/desktop/wm/preferences/button-layout", value: "'close,maximize,minimize:'" } # set Window buttons to the left

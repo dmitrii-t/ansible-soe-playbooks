@@ -1,0 +1,11 @@
+---
+- name: Insall Gimp
+  hosts: localhost
+  vars:
+  - home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+  - name: Install Gimp
+    become: true
+    become_method: sudo
+    apt: name=gimp state="present"

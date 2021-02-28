@@ -5,7 +5,6 @@
   - home: "{{ lookup('env', 'HOME') }}"
 
   tasks:
-
   - name: Insall Network Manager Gnome
     become: true
     become_method: sudo
